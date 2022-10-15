@@ -22,31 +22,7 @@ Use faker to create a dataframe that includes:
 * Number of calls
 * Disatisfication Rate 
 
-
-```python
-import faker 
-
-fake = faker.Faker()
-
-def create_agents(num):
-    
-    state = [fake.state() for x in range(10)]
-
-    agents = [{'Agent ID': x + 1000,
-                  'Agent Name': fake.name(), 
-                  'Compliant Rate': float(np.random.uniform(0,0.5,1)),
-                  'Customer Calls': int(np.random.uniform(0, 2000, 1)) 
-                  } for x in range(num)
-                ]
-        
-    return agents
-
-df_agent = pd.DataFrame(create_agents(num = 1000))
-```
-Check the dataframe
-```
-df_agent.head()
-```
+Check the dataframe df_agent
 
 |    |   Agent ID | Agent Name    |   Number of calls |   Disatisfication Rate |
 |---:|-----------:|:--------------|------------------:|-----------------------:|
@@ -55,6 +31,10 @@ df_agent.head()
 |  2 |       1002 | Karen Moore   |              1853 |             0.00966783 |
 |  3 |       1003 | Julia Buckley |              1568 |             0.0289132  |
 |  4 |       1004 | Renee Smith   |               119 |             0.106509   |
+
+
+<img src="img/dist1.png"/>
+
 
 ## Step 1: Creat A/B Groups
 
@@ -66,7 +46,20 @@ The principle challenge in assigning A/B groups is elimination of "selection bia
 
 In other words, these two groups need to be representative of the population and similar in every way. Therefore, we need to make sure samples in two groups start off from the same baseline before the experiement starts. That means, in this example, agents in each group should have similar disatisfication rate and number of customer calls. 
 
-When there're multi-dimensional metrics to consider when randomizing the samples, 
+In this analysis, a two-stage cluster sampling method was adopted. 
 
 
-[^1]Covariate balance: [Assessing Balance](https://cran.r-project.org/web/packages/MatchIt/vignettes/assessing-balance.html#:~:text=Covariate%20balance%20is%20the%20degree,across%20levels%20of%20the%20treatment.) 
+
+
+
+
+
+Mahalanobis Distance[^2] method was adopted in this analysis to take account of multi-dimenstional metrics. 
+
+
+
+
+
+[^1] Covariate balance: [Assessing Balance](https://cran.r-project.org/web/packages/MatchIt/vignettes/assessing-balance.html#:~:text=Covariate%20balance%20is%20the%20degree,across%20levels%20of%20the%20treatment.) 
+
+[^2] Learn more about [Mahalanobis Distance method](http://mccormickml.com/2014/07/22/mahalanobis-distance/) and the [implementation in python](https://www.geeksforgeeks.org/how-to-calculate-mahalanobis-distance-in-python/). 
