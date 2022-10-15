@@ -11,7 +11,7 @@ XYZ company has a customer service department to offer assistances for addressin
 
 After reviewing the result, the company plans to roll out a new SOP training to all customer service agents, hoping this could help improve the performance and better customer ratings. However, before investing training resources at full scope, the company wanted to design a A/B testing, at a smaller scale, for experiementing whether the new SOP training can actually make any difference. 
 
-As a result, a total of 1,000 customer service agents were selected for the experiement. The goal is to distribute them into two groups, treatment and control, run the experiement for X months, and evaluate the efficacy of the training program. 
+As a result, a total of 1,000 customer service agents were selected randomly for the experiement. The goal is to distribute them into two groups, treatment and control, run the experiement for X months, and evaluate the efficacy of the training program. 
 
 ### Create a dummy dataset for the case
 
@@ -57,3 +57,16 @@ df_agent.head()
 |  4 |       1004 | Renee Smith   |               119 |             0.106509   |
 
 ## Step 1: Creat A/B Groups
+
+The principle challenge in assigning A/B groups is elimination of "selection bias" - typically introduced by improper randomization. To allow apples-to-apples comparison in an *ceteris paribus* experiement, the two groups need to meet a few criteria:
+
+* each is representative of the entire population
+* are independent from each other
+* remain covariate balance[^1] between groups
+
+In other words, these two groups need to be representative of the population and similar in every way. Therefore, we need to make sure samples in two groups start off from the same baseline before the experiement starts. That means, in this example, agents in each group should have similar disatisfication rate and number of customer calls. 
+
+When there're multi-dimensional metrics to consider when randomizing the samples, 
+
+
+[^1]Covariate balance: [Assessing Balance](https://cran.r-project.org/web/packages/MatchIt/vignettes/assessing-balance.html#:~:text=Covariate%20balance%20is%20the%20degree,across%20levels%20of%20the%20treatment.) 
