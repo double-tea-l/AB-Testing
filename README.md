@@ -37,8 +37,6 @@ Check the dataframe df_agent
 |  4 |       1004 | Renee Smith   |               119 |             0.106509   |
 
 
-<img src="img/dummy.png"/>
-
 ## 2. Creat A/B Groups
 
 ### 2.1 Selection Bias & Randomization Concept
@@ -61,7 +59,8 @@ Mahalanobis distance[^1] can be useful to evaluate data variances where there're
 
 In this analysis, a two-stage cluster sampling method was applied. First, the population was splitted into four different clusters based on a K-Mean algorithm. After that, equal amount of data points were randomly drew from each cluster and formed a control and treatment group. 
 
-<img src="img/cluster.png"/> <img src="img/ab_groups.png"/>
+<img src="img/cluster.png"/> 
+<img src="img/ab_groups.png"/>
 
 ### 2.4 Check Balance
 
@@ -72,6 +71,8 @@ Checking balance is an essential step in sampling. A few things were checked in 
 * Sample mean
 
 A `Two-sample Kolmogorov-Smirnov Test` was performed with the null hypothesis as "the two distributions of A/B groups are identical". The result is that `p-value > 0.05`, which means we cannot reject the null hypothesis. 
+
+<img src="img/normality.png"/> 
 
 ```
 stats.ks_2samp(df_A['Disatisfication Rate'], df_B['Disatisfication Rate'])
